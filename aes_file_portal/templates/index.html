@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>🔐 Secure File Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+
+    h1 {
+      color: #2c3e50;
+      border-bottom: 2px solid #2980b9;
+      padding-bottom: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .upload-section {
+      margin-bottom: 30px;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
+    input[type="submit"] {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background: #1c5980;
+    }
+
+    .file-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .file-list li {
+      margin-bottom: 10px;
+      background: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .file-list a {
+      text-decoration: none;
+      color: #2980b9;
+      font-weight: bold;
+      float: right;
+    }
+
+    .message {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Secure File Upload Portal</h1>
+
+    <div class="upload-section">
+      <form method="post" enctype="multipart/form-data" action="/upload">
+        <label><strong>Select a file to upload:</strong></label><br>
+        <input type="file" name="file" required>
+        <br>
+        <input type="submit" value="Upload">
+      </form>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="file-list">
+      <h2>📂 Available Files</h2>
+      <ul>
+        {% for file in files %}
+          <li>
+            {{ file }}
+            <a href="/download/{{ file }}">Download</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
