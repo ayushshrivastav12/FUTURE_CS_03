@@ -1,5 +1,3 @@
-FUTURE_CS_03
-
 🔒 Secure File Sharing App
 
 A simple & secure file sharing app built during my internship to learn web development and cryptography.
